@@ -2,8 +2,8 @@ import { Position } from "./board.js"
 
 const herokuServerID = "https://chess2-api.herokuapp.com"
 const herokuSocketID = "ws://chess2-api.herokuapp.com"
-const localServerID = "http://127.0.0.1:8080"
-const localSocketID = "ws://127.0.0.1:8080"
+const localServerID = "http://@:8080";
+const localSocketID = "ws://@:8080";
 
 export const canMoveColor = "red"
 export const prevMoveColor = "green"
@@ -47,19 +47,25 @@ export function disconnectText(secondRemaining){
     return "You've disconnect 😥 You have " + secondRemaining.toString() + " seconds to reconnect. Try reload the page."
 }
 
-export function serverID(){
-    if (window.location.href.split(":")[1] == "//127.0.0.1"){
-        return localServerID
+export function serverID() {
+    if (
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "localhost"
+    ) {
+      return localServerID.replace("@", window.location.hostname);
     }
-    return herokuServerID
-}
-
-export function socketID(){
-    if (window.location.href.split(":")[1] == "//127.0.0.1"){
-        return localSocketID
+    return herokuServerID;
+  }
+  
+  export function socketID() {
+    if (
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname === "localhost"
+    ) {
+      return localSocketID.replace("@", window.location.hostname);
     }
-    return herokuSocketID
-}
+    return herokuSocketID;
+  }
 
 export function getQuerystring() {
     let output={}
