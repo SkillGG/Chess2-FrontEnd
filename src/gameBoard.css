@@ -1,0 +1,10 @@
+#board-container.reversed #chess-board {
+  transform: rotate(180deg);
+}
+#board-container.reversed #chess-board div:not(.dragged) {
+  transform: rotate(180deg);
+}
+#z1 {
+  transform: rotate(0deg);
+  z-index: 99;
+}
